@@ -1,0 +1,171 @@
+.streamNavBar {
+  background: transparent linear-gradient(270deg, #0099cd 0%, #5bc3b2 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.videoPlaceholder,
+.videoPlaceholderSmall {
+  background: #e6e7e7 0% 0% no-repeat padding-box;
+  height: 400px;
+  width: 100%;
+  display: block;
+}
+
+.videoPlaceholderSmall {
+  width: 364px;
+  height: 205px;
+}
+
+h2 {
+  color: #0099cd;
+  font-size: 26px;
+}
+
+.videoDetails {
+  letter-spacing: 0px;
+  color: #939598;
+  font-size: 16px;
+}
+
+.videoDetails .title {
+  color: #0099cd;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+section,
+.indexDivider {
+  border-bottom: 2px solid rgba(204, 204, 204, 0.6);
+  padding-bottom: 20px;
+}
+
+h4 {
+  font-size: 26px;
+  letter-spacing: 0px;
+  color: #939598;
+  text-transform: uppercase;
+}
+
+.streamGreen {
+  color: #0099cd;
+}
+
+.streamButton {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #0099cd;
+  color: #0099cd;
+  padding-top: 0;
+  padding-bottom: 0;
+  letter-spacing: 0;
+}
+
+.streamButton:hover {
+  background: linear-gradient(90deg, #5bc3b2 0%, #0099cd 100%) 0% 0% no-repeat
+    padding-box;
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.bg-StreamGreen {
+  background: transparent linear-gradient(90deg, #5bc3b2 0%, #0099cd 100%) 0% 0%
+    no-repeat padding-box;
+}
+
+.indexBorder {
+  border: 1px solid #0099cd;
+  border-radius: 8px;
+}
+
+.grey,
+.streamGrey {
+  color: #939598;
+}
+
+.streamLinks a {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 18px;
+  letter-spacing: 0px;
+  color: #0099cd;
+}
+
+.fa-user-circle {
+  border: 2px solid #0099cd;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.fa-times-circle,
+.fa-check-circle {
+  bottom: 8px;
+  right: 74px;
+  position: absolute;
+  background: #ffffff;
+}
+.verified {
+  color: #51b8a3;
+}
+
+.MultiCarousel {
+  float: left;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+.MultiCarousel .MultiCarousel-inner {
+  transition: 1s ease all;
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item {
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item > div {
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 1px 3px 6px #00000029;
+  border-radius: 8px;
+}
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+  position: absolute;
+  background: #f2f2f2 0% 0% no-repeat padding-box;
+  height: 100%;
+  color: #bdbec0;
+  width: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.MultiCarousel .leftLst {
+  left: 0;
+}
+.MultiCarousel .rightLst {
+  right: 0;
+}
+
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+  pointer-events: none;
+  background: #ccc;
+  display: none;
+}
+
+.streamTransparent:hover {
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+nav .navbar-nav li a {
+  color: #ffffff !important;
+  text-transform: uppercase;
+}
+
+.activity-row {
+    border: 0.5px solid rgba(112, 112, 112, 0.4);
+    border-radius: 8px;
+    padding: 10px;
+}
