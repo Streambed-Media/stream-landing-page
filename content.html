@@ -134,6 +134,9 @@
               <div id="collaborators" class="mt-4">
                 <h4 class="mb-4">Collaborators</h4>
                 <div>
+                  <h5 class="text-center m-auto pb-5" id="nothing-text">
+                    Nothing to show here.
+                   </h5>
                   <div
                     class="MultiCarousel"
                     data-items="1,3,5,6"
@@ -142,8 +145,7 @@
                     data-interval="200"
                   >
                     <div class="MultiCarousel-inner" id="collaborator-slider">
-                     
-                  
+                    
                     </div>
                     <div class="leftLst"><i class="fas fa-chevron-left fa-2x"></i></div>
                     <div class="rightLst"><i class="fas fa-chevron-right fa-2x"></i></div>
@@ -384,11 +386,11 @@
 
             $('.activity-row').remove();
             $.each(data.activityFeed, function(index,activity) {
-                $(".activity-feed-row").append('<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">'+ activity.userId.displayName +'</b> posted a video to <b class="streamGreen text-capitalize">'+activity.platform+'.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>'+new Date(activity.dateCreated).toDateString()+'</span> <span>'+new Date(activity.dateCreated).toLocaleTimeString()+'</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content/'+activity.userVideoId._id+'" >CHECK IT OUT</a></div></div>')
+                $(".activity-feed-row").append('<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">'+ activity.userId.displayName +'</b> posted a video to <b class="streamGreen text-capitalize">'+activity.platform+'.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>'+new Date(activity.dateCreated).toDateString()+'</span> <span>'+new Date(activity.dateCreated).toLocaleTimeString()+'</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="content/'+activity.userVideoId._id+'" >CHECK IT OUT</a></div></div>')
             })
             var collab = [...data.collaborators]
             collab.sort(function(a,b){return b.isVerified-a.isVerified});  
-
+            if(collab && collab.length > 0) $("#nothing-text").remove()
             $.each(collab, function(index,collaborator) {
               var name = collaborator.isVerified ? (collaborator.userId || {}).displayName : 'Unverified'
               var className = collaborator.isVerified ? 'streamGreen' : 'streamPurple'
