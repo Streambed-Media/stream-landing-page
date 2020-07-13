@@ -164,6 +164,10 @@ nav .navbar-nav li a {
   text-transform: uppercase;
 }
 
+.navbar-brand {
+  background-color: transparent;
+}
+
 .activity-row {
     border: 0.5px solid rgba(112, 112, 112, 0.4);
     border-radius: 8px;
