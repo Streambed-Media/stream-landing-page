@@ -12,12 +12,12 @@
     <title>Streambed Media - Indexing Page</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link
-      href="vendor/simple-line-icons/css/simple-line-icons.css"
+      href="/vendor/simple-line-icons/css/simple-line-icons.css"
       rel="stylesheet"
       type="text/css"
     />
@@ -27,15 +27,15 @@
     />
 
     <!-- Custom styles for this template -->
-    <link href="css/landing-page.css" rel="stylesheet" />
-    <link href="css/content-page.css" rel="stylesheet" />
+    <link href="/css/landing-page.css" rel="stylesheet" />
+    <link href="/css/content-page.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-dark navbar-expand-lg sticky-top streamNavBar">
       <div class="container">
-        <a class="navbar-brand" href="#"
-          ><img src="img/logo.svg" alt="Streambed Logo"
+        <a class="navbar-brand" href="#" style="background-color: transparent;"
+          ><img  src="/img/logo.svg" alt="Streambed Logo"
         /></a>
         <button
           class="navbar-toggler streamToggler"
@@ -54,15 +54,15 @@
         <div class="collapse navbar-collapse" id="navbarItems">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link ml-md-5" href="index"
+              <a class="nav-link ml-md-5" href="/index"
                 >Home<span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link ml-md-5" href="about">About</a>
+              <a class="nav-link ml-md-5" href="/about">About</a>
             </li>
           </ul>
-          <a class="btn btn-primary streamButton streamTransparent" href="subscribe">SUBSCRIBE</a>
+          <a class="btn btn-primary streamButton streamTransparent" href="/subscribe">SUBSCRIBE</a>
         </div>
       </div>
     </nav>
@@ -223,7 +223,7 @@
                   >
                 </p>
                 <p class="text-center">
-                  <a class="indexLinks" href="subscribe">Something Missing?</a>
+                  <a class="indexLinks" href="/subscribe">Something Missing?</a>
                 </p>
                 <p class="text-center">
                   <a
@@ -286,15 +286,15 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-5">
-            <img class="mb-2" src="img/logo.svg" alt="Streambed logo" />
+            <img class="mb-2" src="/img/logo.svg" alt="Streambed logo" />
             <p class="text-white">Peterborough | New York</p>
           </div>
           <div class="col-md-2">
             <h5 class="text-white streamFooterTitle">COMPANY</h5>
             <div class="list-group">
-              <a href="#" class="text-white streamFooterList">HOME</a>
-              <a href="about" class="text-white streamFooterList">ABOUT</a>
-              <a href="subscribe" class="text-white streamFooterList"
+              <a href="/index" class="text-white streamFooterList">HOME</a>
+              <a href="/about" class="text-white streamFooterList">ABOUT</a>
+              <a href="/subscribe" class="text-white streamFooterList"
                 >SUBSCRIBE</a
               >
             </div>
@@ -303,10 +303,10 @@
           <div class="col-md-2">
             <h5 class="text-white streamFooterTitle">LEGAL</h5>
             <div class="list-group">
-              <a href="terms" class="text-white streamFooterList"
+              <a href="/terms" class="text-white streamFooterList"
                 >TERMS OF SERVICE</a
               >
-              <a href="privacy" class="text-white streamFooterList">PRIVACY</a>
+              <a href="/privacy" class="text-white streamFooterList">PRIVACY</a>
             </div>
           </div>
 
@@ -345,8 +345,8 @@
       </div>
     </footer>
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script>
       String.prototype.toHHMMSS = function () {
@@ -360,10 +360,15 @@
     if (seconds < 10) {seconds = "0"+seconds;}
     return hours+':'+minutes+':'+seconds;
 }
-      const urlParams = new URLSearchParams(window.location.search);
       $(document).ready(function () {
+        const path = window.location.pathname.replace(/\/content\//, "")
+
+        if(!path || path === "/content") {
+          window.location.replace("/index")
+        } 
+
         fetch(
-          "http://localhost:5000/posts/video?content_id=" + urlParams.get("q") || "5f0485941101c259e39a62c4"
+          "https://app.streambedmedia.com/posts/video?content_id=" + path
         )
           .then((resp) => resp.json())
           .then(function (data) {
@@ -381,12 +386,12 @@
             $("#originalVideo .title").append(data.title);
             $("#originalVideo .time").append((data.videoLength || 0).toString().toHHMMSS());
             $("#originalVideo .date").append(new Date(data.dateCreated).toDateString());
-            $('.videoPlaceholderSmall iframe').attr("src", "http://localhost:5000/" + data.videoPath);
+            $('.videoPlaceholderSmall iframe').attr("src", "https://app.streambedmedia.com/" + data.videoPath);
             
 
             $('.activity-row').remove();
             $.each(data.activityFeed, function(index,activity) {
-                $(".activity-feed-row").append('<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">'+ activity.userId.displayName +'</b> posted a video to <b class="streamGreen text-capitalize">'+activity.platform+'.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>'+new Date(activity.dateCreated).toDateString()+'</span> <span>'+new Date(activity.dateCreated).toLocaleTimeString()+'</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="content/'+activity.userVideoId._id+'" >CHECK IT OUT</a></div></div>')
+                $(".activity-feed-row").append('<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">'+ activity.userId.displayName +'</b> posted a video to <b class="streamGreen text-capitalize">'+activity.platform+'.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>'+new Date(activity.dateCreated).toDateString()+'</span> <span>'+new Date(activity.dateCreated).toLocaleTimeString()+'</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content/'+activity.userVideoId._id+'" >CHECK IT OUT</a></div></div>')
             })
             var collab = [...data.collaborators]
             collab.sort(function(a,b){return b.isVerified-a.isVerified});  
