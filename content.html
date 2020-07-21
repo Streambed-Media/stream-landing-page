@@ -1,11 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
 
@@ -35,7 +33,7 @@
     <nav class="navbar navbar-dark navbar-expand-lg sticky-top streamNavBar">
       <div class="container">
         <a class="navbar-brand" href="#" style="background-color: transparent;"
-          ><img  src="/img/logo.svg" alt="Streambed Logo"
+          ><img src="/img/logo.svg" alt="Streambed Logo"
         /></a>
         <button
           class="navbar-toggler streamToggler"
@@ -62,7 +60,11 @@
               <a class="nav-link ml-md-5" href="/about">About</a>
             </li>
           </ul>
-          <a class="btn btn-primary streamButton streamTransparent" href="/subscribe">SUBSCRIBE</a>
+          <a
+            class="btn btn-primary streamButton streamTransparent"
+            href="/subscribe"
+            >SUBSCRIBE</a
+          >
         </div>
       </div>
     </nav>
@@ -76,12 +78,15 @@
             <div class="col-xs-12 col-md-8 mt-5 mb-5">
               <div class="videoPlaceholder">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+                  <iframe
+                    class="embed-responsive-item"
+                    src=""
+                    allowfullscreen
+                  ></iframe>
                 </div>
               </div>
               <section class="videoInfoSection mt-3">
-                <h2>
-                </h2>
+                <h2></h2>
                 <div class="d-flex justify-content-between videoDetails">
                   <span class="date"></span>
                   <span class="time"></span>
@@ -89,14 +94,33 @@
                 </div>
               </section>
               <section id="originalVideo">
-
                 <!-- Orginal Video -->
                 <h4>Original Content</h4>
                 <div class="d-flex flex-row mt-4">
                   <div class="d-flex flex-column">
                     <div class="videoPlaceholderSmall">
                       <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+                        <!-- <video width="320" height="240" controls>
+                          <source id="video-src" src="" type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video> -->
+                        <video width="320" height="240" controls autoplay>
+                          <source src="" type="video/mp4" id="video-src" />
+                        </video>
+                        <!-- <iframe
+                          width="560"
+                          height="315"
+                          src="file://localhost/home/dev/Desktop/streambed-app/backend/public/uploads/5ee3d86f76ac2b1dc9ac485a/video.mp4"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                        >
+                        </iframe> -->
+                        <!-- <iframe
+                          class="embed-responsive-item"
+                          src="https://www.youtube.com/watch?v=DhdOKh5Issw"
+                          allowfullscreen
+                        ></iframe> -->
                       </div>
                     </div>
                     <!-- Placeholder image for video -->
@@ -105,8 +129,7 @@
                   <div
                     class="d-flex flex-column ml-sm-4 flex-wrap videoDetails"
                   >
-                    <p class="title">
-                    </p>
+                    <p class="title"></p>
                     <p class="date"></p>
                     <p class="time"></p>
                   </div>
@@ -136,7 +159,7 @@
                 <div>
                   <h5 class="text-center m-auto pb-5" id="nothing-text">
                     Nothing to show here.
-                   </h5>
+                  </h5>
                   <div
                     class="MultiCarousel"
                     data-items="1,3,5,6"
@@ -144,27 +167,32 @@
                     id="MultiCarousel"
                     data-interval="200"
                   >
-                    <div class="MultiCarousel-inner" id="collaborator-slider">
-                    
+                    <div
+                      class="MultiCarousel-inner"
+                      id="collaborator-slider"
+                    ></div>
+                    <div class="leftLst">
+                      <i class="fas fa-chevron-left fa-2x"></i>
                     </div>
-                    <div class="leftLst"><i class="fas fa-chevron-left fa-2x"></i></div>
-                    <div class="rightLst"><i class="fas fa-chevron-right fa-2x"></i></div>
-                  </div>  
+                    <div class="rightLst">
+                      <i class="fas fa-chevron-right fa-2x"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
-            
 
               <!-- Activity feed section - currently using placeholder images -->
               <div id="activityFeed">
                 <h4>Video Activity Feed</h4>
 
                 <div class="container indexBorder mt-4 activity-feed-row">
-                  <div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row">
-                      <h5 class="text-center mx-auto">Nothing to show here</h5>
+                  <div
+                    class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"
+                  >
+                    <h5 class="text-center mx-auto">Nothing to show here</h5>
                   </div>
                 </div>
               </div>
-
 
               <div class="d-flex flex-row justify-content-center mt-5">
                 <div class="d-flex flex-column justify-content-center">
@@ -185,7 +213,7 @@
                   <i class="fas fa-user-circle fa-7x mt-2 mb-3 streamGrey"></i>
                 </div>
                 <h5 class="text-center" id="displayName"></h5>
-                <p class="text-center grey mb-0" id="userSince" >User Since:</p>
+                <p class="text-center grey mb-0" id="userSince">User Since:</p>
                 <p class="text-center" id="memberSince"></p>
               </div>
 
@@ -350,63 +378,123 @@
 
     <script>
       String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+        var sec_num = parseInt(this, 10); // don't forget the second param
+        var hours = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - hours * 3600) / 60);
+        var seconds = sec_num - hours * 3600 - minutes * 60;
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    return hours+':'+minutes+':'+seconds;
-}
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        return hours + ":" + minutes + ":" + seconds;
+      };
       $(document).ready(function () {
-        const path = window.location.pathname.replace(/\/content\//, "")
+        const path = window.location.pathname.replace(/\/content\//, "");
 
-        if(!path || path === "/content") {
-          window.location.replace("/index")
-        } 
+        if (!path || path === "/content") {
+          window.location.replace("/index");
+        }
 
-        fetch(
-          "https://app.streambedmedia.com/posts/video?content_id=" + path
-        )
+        var url = document.location.href;
+        var v_id = url.split("?")[1];
+
+        console.log("path", v_id);
+        fetch("http://localhost:5000/api/videos?v_id=" + v_id.split("=")[1])
           .then((resp) => resp.json())
           .then(function (data) {
-            console.log(data, data.userId.displayName)
+            console.log(data, data.userId.displayName);
             $("#displayName").append(data.userId.displayName);
-            if(data.userId.memberSince){
+            if (data.userId.memberSince) {
               $("#memberSince").append(data.userId.memberSince);
             } else {
-              $("#userSince").remove()
+              $("#userSince").remove();
             }
-            $('.videoPlaceholder iframe').attr("src", "https://www.youtube.com/embed/" + (data.youtubeId || {}).videoId);
-            $(".videoInfoSection h2").append((data.youtubeId || {}).title);
-            $(".videoInfoSection .videoDetails .date").append(new Date(data.dateCreated).toDateString());
-            $(".videoInfoSection .videoDetails .time").append((data.videoLength || 0).toString().toHHMMSS());
+            $(".videoPlaceholder iframe").attr(
+              "src",
+              "https://www.youtube.com/embed/" + (data.videoId || {})
+            );
+            $(".videoInfoSection h2").append(data.title);
+            $(".videoInfoSection .videoDetails .date").append(
+              new Date(data.createdAt).toDateString()
+            );
+            $(".videoInfoSection .videoDetails .time").append(
+              (data.videoLength || 0).toString().toHHMMSS()
+            );
             $("#originalVideo .title").append(data.title);
-            $("#originalVideo .time").append((data.videoLength || 0).toString().toHHMMSS());
-            $("#originalVideo .date").append(new Date(data.dateCreated).toDateString());
-            $('.videoPlaceholderSmall iframe').attr("src", "https://app.streambedmedia.com/" + data.videoPath);
-            
+            $("#originalVideo .time").append(
+              (data.videoLength || 0).toString().toHHMMSS()
+            );
+            $("#originalVideo .date").append(
+              new Date(data.createdAt).toDateString()
+            );
+            // $(".videoPlaceholderSmall #video-src").attr(
+            //   "src",
+            //   "https://app.streambedmedia.com/uploads/5f0aa7248c3f2e7794752f5d/video.mp4"
+            // );
+            var v_path = `https://app.streambedmedia.com/uploads/${data.userId._id}/${data.vid}/video.mp4`;
+            $(".videoPlaceholderSmall video").html(
+              `<source src=${`https://app.streambedmedia.com/uploads/${data.userId._id}/${data.vid}/video.mp4`} type="video/mp4"></source>`
+            );
+            // $(".videoPlaceholderSmall #video-src")[0].load();
 
-            $('.activity-row').remove();
-            $.each(data.activityFeed, function(index,activity) {
-                $(".activity-feed-row").append('<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">'+ activity.userId.displayName +'</b> posted a video to <b class="streamGreen text-capitalize">'+activity.platform+'.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>'+new Date(activity.dateCreated).toDateString()+'</span> <span>'+new Date(activity.dateCreated).toLocaleTimeString()+'</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content/'+activity.userVideoId._id+'" >CHECK IT OUT</a></div></div>')
-            })
-            var collab = [...data.collaborators]
-            collab.sort(function(a,b){return b.isVerified-a.isVerified});  
-            if(collab && collab.length > 0) $("#nothing-text").remove()
-            $.each(collab, function(index,collaborator) {
-              var name = collaborator.isVerified ? (collaborator.userId || {}).displayName : 'Unverified'
-              var className = collaborator.isVerified ? 'streamGreen' : 'streamPurple'
-              var status =  collaborator.isVerified ? 'Verified' : 'Unverified'
-              var icon = collaborator.isVerified ? 'fa-check-circle' : 'fa-times-circle'
-
-            $("#collaborator-slider").append('<div class="item"><div class="d-flex flex-column justify-content-center"> <div class="position-relative"> <i class="fas fa-user-circle fa-5x text-center mb-0 streamGrey" ></i ><i class="fas text-right '+icon+' fa-lg '+className+' checkIcon" ></i> </div> <h5 class="streamGreen text-center mt-2 mb-1">'+ name +'</h5> <p class="streamGrey text-center">'+ collaborator.role +'</p> <p class="' + className + ' text-center">'+ status +'</p></div></div>')
-            })
-            ResCarouselSize();
+            $(".activity-row").remove();
+            $.each(data.activityFeed, function (index, activity) {
+              $(".activity-feed-row").append(
+                '<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">' +
+                  activity.userId.displayName +
+                  '</b> posted a video to <b class="streamGreen text-capitalize">' +
+                  activity.platform +
+                  '.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>' +
+                  new Date(activity.dateCreated).toDateString() +
+                  "</span> <span>" +
+                  new Date(activity.dateCreated).toLocaleTimeString() +
+                  '</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content/' +
+                  activity.userVideoId._id +
+                  '" >CHECK IT OUT</a></div></div>'
+              );
             });
-      
+            var collab = [...data.collaborators];
+            collab.sort(function (a, b) {
+              return b.isVerified - a.isVerified;
+            });
+            if (collab && collab.length > 0) $("#nothing-text").remove();
+            $.each(collab, function (index, collaborator) {
+              var name = collaborator.isVerified
+                ? (collaborator.userId || {}).displayName
+                : "Unverified";
+              var className = collaborator.isVerified
+                ? "streamGreen"
+                : "streamPurple";
+              var status = collaborator.isVerified ? "Verified" : "Unverified";
+              var icon = collaborator.isVerified
+                ? "fa-check-circle"
+                : "fa-times-circle";
+
+              $("#collaborator-slider").append(
+                '<div class="item"><div class="d-flex flex-column justify-content-center"> <div class="position-relative"> <i class="fas fa-user-circle fa-5x text-center mb-0 streamGrey" ></i ><i class="fas text-right ' +
+                  icon +
+                  " fa-lg " +
+                  className +
+                  ' checkIcon" ></i> </div> <h5 class="streamGreen text-center mt-2 mb-1">' +
+                  name +
+                  '</h5> <p class="streamGrey text-center">' +
+                  collaborator.role +
+                  '</p> <p class="' +
+                  className +
+                  ' text-center">' +
+                  status +
+                  "</p></div></div>"
+              );
+            });
+            ResCarouselSize();
+          });
+
         var itemsMainDiv = ".MultiCarousel";
         var itemsDiv = ".MultiCarousel-inner";
         var itemWidth = "";
