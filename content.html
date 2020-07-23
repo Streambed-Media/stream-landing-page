@@ -395,51 +395,51 @@
         return hours + ":" + minutes + ":" + seconds;
       };
       $(document).ready(function () {
-        const path = window.location.pathname.replace(/\/content\//, "");
-
-        if (!path || path === "/content") {
-          window.location.replace("/index");
-        }
-
         var url = document.location.href;
+
         var v_id = url.split("?")[1];
 
-        console.log("path", v_id);
-        fetch("http://localhost:5000/api/videos?v_id=" + v_id.split("=")[1])
+        fetch(
+          "https://app.streambedmedia.com/uploads/api/videos?v_id=" +
+            v_id.split("=")[1]
+        )
           .then((resp) => resp.json())
           .then(function (data) {
-            console.log(data, data.userId.displayName);
-            $("#displayName").append(data.userId.displayName);
-            if (data.userId.memberSince) {
-              $("#memberSince").append(data.userId.memberSince);
+            const { userDoc, video, activityFeed } = data;
+            console.log(video, userDoc, activityFeed);
+            $("#displayName").append(userDoc.userId.displayName);
+            if (userDoc.userId.memberSince) {
+              $("#memberSince").append(
+                userDoc.userId.memberSince.split("T")[0]
+              );
             } else {
               $("#userSince").remove();
             }
             $(".videoPlaceholder iframe").attr(
               "src",
-              "https://www.youtube.com/embed/" + (data.videoId || {})
+              "https://www.youtube.com/embed/" + (userDoc.videoId || {})
             );
-            $(".videoInfoSection h2").append(data.title);
+            $(".videoInfoSection h2").append(userDoc.title);
             $(".videoInfoSection .videoDetails .date").append(
-              new Date(data.createdAt).toDateString()
+              new Date(userDoc.createdAt).toDateString()
             );
             $(".videoInfoSection .videoDetails .time").append(
               (data.videoLength || 0).toString().toHHMMSS()
             );
-            $("#originalVideo .title").append(data.title);
+            $("#originalVideo .title").append(userDoc.title);
             $("#originalVideo .time").append(
-              (data.videoLength || 0).toString().toHHMMSS()
+              (userDoc.videoLength || 0).toString().toHHMMSS()
             );
             $("#originalVideo .date").append(
-              new Date(data.createdAt).toDateString()
+              new Date(userDoc.createdAt).toDateString()
             );
             // $(".videoPlaceholderSmall #video-src").attr(
             //   "src",
             //   "https://app.streambedmedia.com/uploads/5f0aa7248c3f2e7794752f5d/video.mp4"
             // );
-            var v_path = `https://app.streambedmedia.com/uploads/${data.userId._id}/${data.vid}/video.mp4`;
+            var v_path = `https://app.streambedmedia.com/uploads/${userDoc.userId._id}/${userDoc.vid}/${video}`;
             $(".videoPlaceholderSmall video").html(
-              `<source src=${`https://app.streambedmedia.com/uploads/${data.userId._id}/${data.vid}/video.mp4`} type="video/mp4"></source>`
+              `<source src=${`https://app.streambedmedia.com/uploads/${userDoc.userId._id}/${userDoc.vid}/${video}`} type="video/mp4"></source>`
             );
             // $(".videoPlaceholderSmall #video-src")[0].load();
 
@@ -447,32 +447,32 @@
             $.each(data.activityFeed, function (index, activity) {
               $(".activity-feed-row").append(
                 '<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">' +
-                  activity.userId.displayName +
+                  activity.user.displayName +
                   '</b> posted a video to <b class="streamGreen text-capitalize">' +
-                  activity.platform +
+                  activity.activity.platform +
                   '.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>' +
-                  new Date(activity.dateCreated).toDateString() +
+                  new Date(activity.createdAt).toDateString() +
                   "</span> <span>" +
-                  new Date(activity.dateCreated).toLocaleTimeString() +
-                  '</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content/' +
-                  activity.userVideoId._id +
+                  new Date(activity.createdAt).toLocaleTimeString() +
+                  '</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content.html?v_id=' +
+                  activity.activity.userVideoId +
                   '" >CHECK IT OUT</a></div></div>'
               );
             });
-            var collab = [...data.collaborators];
+            var collab = [...userDoc.collaborators];
             collab.sort(function (a, b) {
               return b.isVerified - a.isVerified;
             });
             if (collab && collab.length > 0) $("#nothing-text").remove();
             $.each(collab, function (index, collaborator) {
-              var name = collaborator.isVerified
-                ? (collaborator.userId || {}).displayName
+              var name = collaborator.verified
+                ? collaborator.user
                 : "Unverified";
-              var className = collaborator.isVerified
+              var className = collaborator.verified
                 ? "streamGreen"
                 : "streamPurple";
-              var status = collaborator.isVerified ? "Verified" : "Unverified";
-              var icon = collaborator.isVerified
+              var status = collaborator.verified ? "Verified" : "Unverified";
+              var icon = collaborator.verified
                 ? "fa-check-circle"
                 : "fa-times-circle";
 
