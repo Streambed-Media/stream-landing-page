@@ -71,6 +71,42 @@
     <div class="container">
       <!--Content Section-->
 
+      <div id="coll-popup" class="verification-popup">
+        <div class="verification-box">
+          <div class="verification-content">
+            <h3>Success!</h3>
+            <span>You’ve been verified.</span>
+            <p>
+              This is how you’ve been identified by the Publisher. Please review
+              this information to confirm if it is correct.
+            </p>
+            <form>
+              <div class="form-group">
+                <label>Name</label>
+                <input
+                  id="user"
+                  placeholder="Sean Cullen"
+                  class="form-control"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                <label>Role</label>
+                <input id="role" placeholder="Brand / Sponsor" class="form-control" value="" />
+              </div>
+            </form>
+            <p>
+              If this information is incorrect, please contact the publisher.
+            </p>
+            <p>
+              As a verified contributor, you’ll be the first to know when we’re
+              onboarding new users. Stay tuned!
+            </p>
+            <button onclick="proceedtoindex()" class="btn btn-primary">Proceed to Index Page</button>
+          </div>
+        </div>
+      </div>
+
       <section class="bg-white mt-0 mb-0 streamGreen">
         <div class="container">
           <div class="row">
@@ -249,9 +285,7 @@
                   >
                 </div>
               </div>
-              <div class="container indexBorder mt-5 p-5 streamLinks">
-                <p class="text-center">
-                  <a
+              <div class="container indexBorder mt-5 p-5 streamLinks"><a
                     class="indexLinks"
                     href="https://www.youtube.com/watch?v=BbfWRkrXNu4&feature=emb_title"
                     target="_blank"
@@ -385,6 +419,20 @@
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script>
+      function proceedtoindex(){
+        // var url = document.location.href;
+        // console.log(url)
+        // const baseurl = document.location.href.split("?")[0]
+        // console.log(baseurl)
+        // const urlParams = new URLSearchParams(window.location.search)
+        // const videoId = urlParams.get("v_id");
+
+        // document.location.replace(baseurl+"?"+"v_id="+videoId)
+
+
+        document.getElementById("coll-popup").className="d-none"
+
+      }
       String.prototype.toHHMMSS = function () {
         var sec_num = parseInt(this, 10); // don't forget the second param
         var hours = Math.floor(sec_num / 3600);
@@ -404,12 +452,34 @@
       };
       $(document).ready(function () {
         var url = document.location.href;
+        console.log(url);
 
+        const urlSplit = url.split("?");
+        let searchParams = new URLSearchParams(window.location.search);
+        const videoID= searchParams.get("v_id")
+        const user = searchParams.get("user");
+        const role = searchParams.get("role");
+        const collaborator = searchParams.get("collaborator");
+        console.log(collaborator)
+
+        document.getElementById("user").value = user;
+        document.getElementById("role").value = role;
+
+        if(!collaborator){
+          document.getElementById("coll-popup").className="d-none"
+        }
+
+        // let id = searchParams.get("id");
+        // let video = searchParams.get("v_id");
+        // console.log(video);
         var v_id = url.split("?")[1];
-
+        if (v_id.split("=")[0] == "v_id") {
+          console.log("v_id", v_id.split("=")[0]);
+        } else {
+          console.log("else", v_id.split("=")[0]);
+        }
         fetch(
-          "https://app.streambedmedia.com/uploads/api/videos?v_id=" +
-            v_id.split("=")[1]
+          "https://app.streambedmedia.com/api/videos?v_id=" + videoID
         )
           .then((resp) => resp.json())
           .then(function (data) {
@@ -459,9 +529,9 @@
                   '</b> posted a video to <b class="streamGreen text-capitalize">' +
                   activity.activity.platform +
                   '.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>' +
-                  new Date(activity.createdAt).toDateString() +
+                  new Date(activity.activity.createdAt).toDateString() +
                   "</span> <span>" +
-                  new Date(activity.createdAt).toLocaleTimeString() +
+                  new Date(activity.activity.createdAt).toLocaleTimeString() +
                   '</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content.html?v_id=' +
                   activity.activity.userVideoId +
                   '" >CHECK IT OUT</a></div></div>'
