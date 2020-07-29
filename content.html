@@ -479,11 +479,11 @@
           console.log("else", v_id.split("=")[0]);
         }
         fetch(
-          "https://app.streambedmedia.com/api/videos?v_id=" + videoID
+          "http://localhost:5000/api/videos?v_id=" + videoID
         )
           .then((resp) => resp.json())
           .then(function (data) {
-            const { userDoc, video, activityFeed } = data;
+            const {success,  userDoc, video, activityFeed } = data;
             console.log(video, userDoc, activityFeed);
             $("#displayName").append(userDoc.userId.displayName);
             if (userDoc.userId.memberSince) {
@@ -495,7 +495,7 @@
             }
             $(".videoPlaceholder iframe").attr(
               "src",
-              "https://www.youtube.com/embed/" + (userDoc.videoId || {})
+              "https://www.youtube.com/embed/" + (userDoc.videoId || videoID)
             );
             $(".videoInfoSection h2").append(userDoc.title);
             $(".videoInfoSection .videoDetails .date").append(
@@ -543,9 +543,8 @@
             });
             if (collab && collab.length > 0) $("#nothing-text").remove();
             $.each(collab, function (index, collaborator) {
-              var name = collaborator.verified
-                ? collaborator.user
-                : "Unverified";
+              var name =  collaborator.user
+                
               var className = collaborator.verified
                 ? "streamGreen"
                 : "streamPurple";
