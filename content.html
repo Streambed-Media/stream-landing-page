@@ -479,7 +479,7 @@
           console.log("else", v_id.split("=")[0]);
         }
         fetch(
-          "http://localhost:5000/api/videos?v_id=" + videoID
+          "https://app.streambedmedia.com/api/videos?v_id=" + videoID
         )
           .then((resp) => resp.json())
           .then(function (data) {
