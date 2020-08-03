@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
 
     <title>Streambed Media - Indexing Page</title>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="main.js"></script>
+    
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -415,7 +419,6 @@
       </div>
     </footer>
     <!-- Bootstrap core JavaScript -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -451,6 +454,9 @@
         return hours + ":" + minutes + ":" + seconds;
       };
       $(document).ready(function () {
+
+     
+        
         var url = document.location.href;
         console.log(url);
 
@@ -534,6 +540,20 @@
                   new Date(activity.activity.createdAt).toLocaleTimeString() +
                   '</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content.html?v_id=' +
                   activity.activity.userVideoId +
+                  '" >CHECK IT OUT</a></div></div>'
+              );
+            });
+            $.each(data.userDoc.collaborators, function (index, coll) {
+              $(".activity-feed-row").append(
+                '<div class="d-flex flex-row justify-content-between mt-3 mb-4 activity-row"><div class="align-items-center d-flex flex-row" ><div class="d-flex flex-column justify-content-center"><i class="fas fa-user-circle fa-4x text-center streamGrey mb-0"></i></div> <div class="ml-4"> <p class="mb-0 streamGrey"> <b class="streamGreen">' +
+                  coll.user +
+                  '</b> is added as  <b class="streamGreen text-capitalize">' +` collaborator` +
+                  '.</b> </p> <div class="d-flex justify-content-between streamGrey"> <span>' +
+                  new Date(data.activityFeed[0].activity.createdAt).toDateString() +
+                  "</span> <span>" +
+                  new Date(data.activityFeed[0].activity.createdAt).toLocaleTimeString() +
+                  '</span> </div> </div> </div> <div class="d-flex flex-column justify-content-center"> <a class="btn btn-primary streamButton activityFeedButton ml-0" href="/content.html?v_id=' +
+                    userDoc.videoId +
                   '" >CHECK IT OUT</a></div></div>'
               );
             });
