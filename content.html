@@ -192,9 +192,9 @@
                   Want to know more?
                 </p>
                 <div>
-                  <a
+                  <a id="flo-link"
                     class="btn btn-primary streamButton"
-                    href="http://network.flo.cash"
+                    href="http://network.flo.cash/"+
                     target="_blank"
                     >HERE'S THE PROOF</a
                   >
@@ -491,6 +491,8 @@
           .then(function (data) {
             const {success,  userDoc, video, activityFeed } = data;
             console.log(video, userDoc, activityFeed);
+            $("#flo-link").attr("href", "http://network.flo.cash/tx/"+userDoc.txid);
+            
             $("#displayName").append(userDoc.userId.displayName);
             if (userDoc.userId.memberSince) {
               $("#memberSince").append(
