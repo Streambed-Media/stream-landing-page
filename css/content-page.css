@@ -228,10 +228,19 @@ nav .navbar-nav li a {
   font-weight: 500;
   line-height: 1.4;
   color: #939598;
-  max-width: 410px;
   margin: 0 auto 20px;
 }
-
+.verification-box small {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #939598;
+  margin: 0 auto 20px;
+  display: block;
+}
+.verification-box .lead {
+  max-width: 410px;
+}
 .verification-box .form-group {
   margin-bottom: 20px;
 }
@@ -278,6 +287,27 @@ nav .navbar-nav li a {
   font-weight: 700;
   border: none;
   text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.verification-box .btn-outline-primary {
+  background: #ffffff;
+  border: 1px solid #0099cd;
+  border-radius: 20px;
+  opacity: 1;
+  text-align: center;
+  line-height: 1.1;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: #0099cd;
+  text-transform: uppercase;
+  opacity: 1;
+  font-weight: 700;
+  font-family: "Nunito", sans-serif;
+  height: 33px;
+}
+.verification-box .btn-outline-primary:hover {
+  background-color: #0099cd;
+  color: #fff;
 }
 /* Verififcation POPUP start end */
 

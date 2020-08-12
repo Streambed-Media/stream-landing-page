@@ -80,7 +80,7 @@
           <div class="verification-content">
             <h3>Success!</h3>
             <span>You’ve been verified.</span>
-            <p>
+            <p class="lead">
               This is how you’ve been identified by the Publisher. Please review
               this information to confirm if it is correct.
             </p>
@@ -102,11 +102,13 @@
             <p>
               If this information is incorrect, please contact the publisher.
             </p>
-            <p>
-              As a verified contributor, you’ll be the first to know when we’re
-              onboarding new users. Stay tuned!
-            </p>
-            <button onclick="proceedtoindex()" class="btn btn-primary">Proceed to Index Page</button>
+          
+            <button onclick="goTosignupPage()" class="btn btn-primary">Sign in to view Analytics</button>
+            <small>
+              (Make sure to use the same email you’ve been tagged in.)
+            </small>
+            <button onclick="proceedtoindex()" class="btn btn-outline-primary ">Maybe Later, Proceed to Public Page</button>
+
           </div>
         </div>
       </div>
@@ -422,6 +424,9 @@
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script>
+      function goTosignupPage(){
+        document.location.replace('https://app.streambedmedia.com/signup')
+      }
       function proceedtoindex(){
         // var url = document.location.href;
         // console.log(url)
