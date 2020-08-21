@@ -314,3 +314,12 @@ nav .navbar-nav li a {
 .d-none {
   display: none;
 }
+
+.block-chain-info p {
+  color: #939598;
+}
+
+.block-chain-info a {
+  display: inline-block;
+  max-width: 130px;
+}
