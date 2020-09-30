@@ -190,16 +190,21 @@
               <section
                 class="d-flex justify-content-center flex-column align-items-center mt-3"
               >
+              <a tabindex="0" class="btn questionMark" role="button" data-toggle="popover" data-trigger="focus" title="Here's the proof" 
+                data-content="When you click here you'll be taken to a page that displays the blockchain verification hash. This code stores your video's information, 
+                including the date and time stamp and your tagged collaborators."><i class="far fa-question-circle"></i></a>
                 <p class="text-center font-weight-bold">
                   Want to know more?
-                </p>
+                  
+                </p> 
+                
                 <div>
                   <a id="flo-link"
-                    class="btn btn-primary streamButton"
+                    class="btn btn-primary streamButton mb-4"
                     href="http://network.flo.cash/"+
                     target="_blank"
                     >HERE'S THE PROOF</a
-                  >
+                  > 
                 </div>
               </section>
 
@@ -291,7 +296,7 @@
                   >
                 </div>
               </div>
-              <div class="container indexBorder mt-5 p-5 streamLinks"><a
+              <div class="container indexBorder mt-5 p-5 streamLinks text-center"><a
                     class="indexLinks"
                     href="https://www.youtube.com/watch?v=BbfWRkrXNu4&feature=emb_title"
                     target="_blank"
@@ -690,6 +695,14 @@
           ResCarousel(ell, Parent, slide);
         }
       });
+
+      $(function () {
+      $('[data-toggle="popover"]').popover()
+      })
+
+      $('.popover-dismiss').popover({
+     trigger: 'focus'
+      })
     </script>
   </body>
 </html>

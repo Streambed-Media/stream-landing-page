@@ -314,3 +314,71 @@ nav .navbar-nav li a {
 .d-none {
   display: none;
 }
+.questionMark {
+  margin-left: auto;
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  padding-right: 0;
+  color: #939598;
+}
+
+/* .newchart-title .questionMark {
+  font-size: 1em;
+  float: right;
+} */
+
+@media (min-width: 769px) {
+  .questionMark {
+    font-size: 1em;
+  }
+}
+
+.questionMark:hover {
+  color: #0099cd;
+}
+
+.popover-header {
+  background-color: white;
+  color: #0099cd;
+  font-family: "Nunito";
+  font-weight: 700;
+  font-size: 1.2em;
+  border-bottom: none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-bottom: 0em;
+  padding-bottom: 0em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .popover-header {
+    font-size: 1em;
+  }
+  .popover-body {
+    font-size: 0.8em;
+  }
+  .popover {
+    padding: 0.3em;
+  }
+}
+
+.popover-body {
+  color: #939598;
+  font-family: "Nunito";
+  font-size: 1em;
+  padding-top: 0.1em;
+}
+
+.popover {
+  border: 1px solid #0099cd;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px 2px #88888821;
+  padding: 0.5em;
+  background: white;
+}
+
+.popover .arrow {
+  visibility: hidden;
+}
