@@ -132,7 +132,26 @@
   font-size: 15px;
   color: #939598;
 }
-.content-stream-header.form-control: .content-stream-header .search {
+.content-stream-header .form-control::-webkit-search-decoration,
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+.content-stream-header .search {
   padding-left: 25px;
   background: url(../img/search.png) 2% center no-repeat;
   background-size: 12px 12px;
