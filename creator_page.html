@@ -364,7 +364,7 @@
         let searchParams = new URLSearchParams(window.location.search);
         const user = searchParams.get("user");
 
-        let get_user = `http://localhost:5000/users/get-create-user/${user}`;
+        let get_user = `https://app.streambedmedia.com/users/get-create-user/${user}`;
         fetch(get_user)
           .then((resp) => resp.json())
           .then(function (data) {
