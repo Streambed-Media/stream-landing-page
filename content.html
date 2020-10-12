@@ -151,10 +151,54 @@
                   <!-- Placeholder image for video -->
                 </div>
 
-                <div class="d-flex flex-column ml-sm-4 flex-wrap videoDetails">
-                  <p class="title"></p>
-                  <p class="date"></p>
-                  <p class="time"></p>
+                <!-- Here's the proof section -->
+              </section>
+              <section
+                class="d-flex justify-content-center flex-column align-items-center mt-3"
+              >
+              <a tabindex="0" class="btn questionMark" role="button" data-toggle="popover" data-trigger="focus" title="Here's the proof" 
+                data-content="When you click here you'll be taken to a page that displays the blockchain verification hash. This code stores your video's information, 
+                including the date and time stamp and your tagged collaborators."><i class="far fa-question-circle"></i></a>
+                <p class="text-center font-weight-bold">
+                  Want to know more?
+                  
+                </p> 
+                
+                <div>
+                  <a id="flo-link"
+                    class="btn btn-primary streamButton mb-4"
+                    href="http://network.flo.cash/"+
+                    target="_blank"
+                    >HERE'S THE PROOF</a
+                  > 
+                </div>
+              </section>
+
+              <!-- Collaborators section - currently has placeholder images -->
+              <div id="collaborators" class="mt-4">
+                <h4 class="mb-4">Collaborators</h4>
+                <div>
+                  <h5 class="text-center m-auto pb-5" id="nothing-text">
+                    Nothing to show here.
+                  </h5>
+                  <div
+                    class="MultiCarousel"
+                    data-items="1,3,5,6"
+                    data-slide="1"
+                    id="MultiCarousel"
+                    data-interval="200"
+                  >
+                    <div
+                      class="MultiCarousel-inner"
+                      id="collaborator-slider"
+                    ></div>
+                    <div class="leftLst">
+                      <i class="fas fa-chevron-left fa-2x"></i>
+                    </div>
+                    <div class="rightLst">
+                      <i class="fas fa-chevron-right fa-2x"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -202,12 +246,33 @@
                   <h5 class="text-center mx-auto">Nothing to show here</h5>
                 </div>
               </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-center mt-5">
-              <div class="d-flex flex-column justify-content-center">
-                <a class="btn btn-primary streamButton" href="https://concept.streambedmedia.com/" target="_blank">SIGN
-                  IN TO SEE MORE</a>
+              <div class="container indexBorder mt-5 p-5 streamLinks text-center"><a
+                    class="indexLinks"
+                    href="https://www.youtube.com/watch?v=BbfWRkrXNu4&feature=emb_title"
+                    target="_blank"
+                    >What is this app?</a
+                  >
+                </p>
+                <p class="text-center">
+                  <a class="indexLinks" href="/subscribe">Something Missing?</a>
+                </p>
+                <p class="text-center">
+                  <a
+                    class="indexLinks"
+                    href="#streamFeatureModal"
+                    data-toggle="modal"
+                    data-target="#streamFeatureModal"
+                    >Is it you in this video?</a
+                  >
+                </p>
+                <p class="text-center mb-0">
+                  <a
+                    class="indexLinks"
+                    href="https://concept.streambedmedia.com/"
+                    target="_blank"
+                    >Sign up to see more</a
+                  >
+                </p>
               </div>
             </div>
           </div>
@@ -605,14 +670,21 @@
         );
       }
 
-      //It is used to get some elements from btn
-      function click(ell, ee) {
-        var Parent = "#" + $(ee).parent().attr("id");
-        var slide = $(Parent).attr("data-slide");
-        ResCarousel(ell, Parent, slide);
-      }
-    });
-  </script>
-</body>
+        //It is used to get some elements from btn
+        function click(ell, ee) {
+          var Parent = "#" + $(ee).parent().attr("id");
+          var slide = $(Parent).attr("data-slide");
+          ResCarousel(ell, Parent, slide);
+        }
+      });
 
+      $(function () {
+      $('[data-toggle="popover"]').popover()
+      })
+
+      $('.popover-dismiss').popover({
+     trigger: 'focus'
+      })
+    </script>
+  </body>
 </html>
