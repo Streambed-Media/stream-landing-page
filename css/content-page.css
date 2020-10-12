@@ -391,3 +391,15 @@ nav .navbar-nav li a {
 .popover .arrow {
   visibility: hidden;
 }
+
+.activity_box_new {
+  position: relative;
+  overflow: hidden;
+}
+.activity_link_new {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
