@@ -567,8 +567,12 @@
               ? "fa-check-circle"
               : "fa-times-circle";
 
+
+              var _linktouser =`https://streambedmedia.com/creator_page.html?user=${encodeURIComponent(collaborator.email)} `
+              
+
             $("#collaborator-slider").append(
-              '<div class="item"><div class="d-flex flex-column justify-content-center activity_box_new"><a href=https://streambedmedia.com/creator_page.html?user='+name+' class="activity_link_new"></a> <div class="position-relative"> <i class="fas fa-user-circle fa-5x text-center mb-0 streamGrey" ></i ><i class="fas text-right ' +
+              '<div class="item"><div class="d-flex flex-column justify-content-center activity_box_new"><a href='+_linktouser+' class="activity_link_new"></a> <div class="position-relative"> <i class="fas fa-user-circle fa-5x text-center mb-0 streamGrey" ></i ><i class="fas text-right ' +
               icon +
               " fa-lg " +
               className +
