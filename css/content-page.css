@@ -404,3 +404,8 @@ nav .navbar-nav li a {
   height: 100%;
   z-index: 1;
 }
+
+.MultiCarousel {
+  float: none;
+  margin-bottom: 25px;
+}

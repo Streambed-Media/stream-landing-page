@@ -316,7 +316,7 @@
         var val = $(this).val().trim().toLowerCase();
 
         var value = $("#filter-post").val().trim().toLowerCase();
-        // console.log($("#card .sh").find("#plateform"));
+
         $("#card .sh").filter(function () {
           $(this).toggle(
             $(this)
@@ -359,7 +359,6 @@
 
       $(document).ready(function () {
         var url = document.location.href;
-        // console.log(url);
 
         let searchParams = new URLSearchParams(window.location.search);
         const user = searchParams.get("user");
@@ -368,7 +367,6 @@
         fetch(get_user)
           .then((resp) => resp.json())
           .then(function (data) {
-            // console.log(data);
             try {
               const { collaborated, ownVideo, user, twitter } = data;
 
@@ -378,16 +376,16 @@
 
               if (user.youtube) {
                 _platform = ` <a href="#" class="y-tube">
-                  <img src="./img/youtube-icon.svg" />
-                </a>`;
+                        <img src="./img/youtube-icon.svg" />
+                      </a>`;
               }
 
               if (user.twitter) {
                 _platform =
                   _platform +
                   `<a href="#" class="twitter">
-                  <img src="./img/twitter-icon.svg" />
-                </a>`;
+                        <img src="./img/twitter-icon.svg" />
+                      </a>`;
               }
 
               $("#social-platform").append(_platform);
@@ -405,27 +403,29 @@
                 `Top ${collaborated.length}  Affiliations`
               );
               let coll_ui = "";
-
               collaborated.forEach((item) => {
                 const _coll = item.collaborators.filter(
-                  (coll) => coll.user === searchParams.get("user")
+                  (coll) => coll.email === searchParams.get("user")
                 );
 
                 if (_coll.length) {
                   coll_ui =
                     coll_ui +
                     `<div class="col-md-4 mb-3">
-                    <div class="affiliation_box">
-                      <div>
-                        <i class="fas fa-user-circle fa-7x streamGrey"></i>
-                      </div>
-                      <span class="name">${_coll[0].user}</span>
-                      <span class="role">${_coll[0].role}</span>
-                      <span class="verification">${
-                        _coll[0].verified ? "Verified" : "Unverified"
-                      }</span>
-                    </div>
-                  </div>`;
+                          <div class="affiliation_box activity_box_new">
+                            <a href=/content.html?v_id=${decodeURI(
+                              item.videoId
+                            )} class="activity_link_new"></a> 
+                            <div>
+                              <i class="fas fa-user-circle fa-7x streamGrey"></i>
+                            </div>
+                            <span class="name">${_coll[0].user}</span>
+                            <span class="role">${_coll[0].role}</span>
+                            <span class="verification">${
+                              _coll[0].verified ? "Verified" : "Unverified"
+                            }</span>
+                          </div>
+                        </div>`;
                 }
               });
 
@@ -435,18 +435,30 @@
 
               if (twitter) {
                 twitter.forEach((tweet) => {
-                  let year = tweet.createdAt.split("-")[0];
+                  let year = tweet.createdAt.split("-")[0] + "_year";
                   if (!_ownTweet[year]) {
                     _ownTweet[year] = [];
                   }
                   _ownTweet[year].push(tweet);
                 });
               }
+
+              let temp = {};
+
+              Object.keys(_ownTweet)
+                .sort((a, b) => {
+                  return b.split("_")[0] - a.split("_")[0];
+                })
+                .forEach(function (key) {
+                  temp[key] = _ownTweet[key];
+                });
+              _ownTweet = temp;
+
               let _ownVideo = {};
               var l = 0;
 
               ownVideo.forEach((item) => {
-                let year = item.createdAt.split("-")[0];
+                let year = item.createdAt.split("-")[0] + "_year";
                 if (!_ownVideo[year]) {
                   _ownVideo[year] = [];
                 }
@@ -454,27 +466,38 @@
                 _ownVideo[year].push(item);
               });
 
+              let temp_video = {};
+
+              Object.keys(_ownVideo)
+                .sort((a, b) => {
+                  return b.split("_")[0] - a.split("_")[0];
+                })
+                .forEach(function (key) {
+                  temp_video[key] = _ownVideo[key];
+                });
+              _ownVideo = temp_video;
+
               for (video in _ownVideo) {
                 l++;
                 $("#card").append(
                   `<div class="card-header" id="${video}">
-                    <button
-                          class="btn btn-link collapsed"
-                          type="button"
-                          data-toggle="collapse"
-                          data-target="#collapse-${video}"
-                          aria-expanded="false"
-                          aria-controls="collapse-${video}"
-                        >
-                        ${video}
-                        </button></div>
+                          <button
+                                class="btn btn-link collapsed"
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#collapse-${video}"
+                                aria-expanded="false"
+                                aria-controls="collapse-${video}"
+                              >
+                              ${video.split("_")[0]}
+                              </button></div>
 
-                        <div
-                        id="collapse-${video}"
-                        class="collapse"
-                        aria-labelledby="${video}"
-                        data-parent="#creatorAccordion"
-                      ></div>`
+                              <div
+                              id="collapse-${video}"
+                              class="collapse"
+                              aria-labelledby="${video}"
+                              data-parent="#creatorAccordion"
+                            ></div>`
                 );
                 _ownVideo[video].forEach((item, i) => {
                   let collaborators = "";
@@ -482,86 +505,88 @@
                     collaborators =
                       collaborators +
                       `<div class="col-md-6 mb-1">
-                                    <div class="shadow_box">
-                                      <div class="card-user">
-                                        <i
-                                          class="fas fa-user-circle fa-2x streamGrey"
-                                        ></i>
-                                        ${
-                                          coll.verified
-                                            ? '<i class="fas fa-check-circle"></i>'
-                                            : '<i class="fas fa-times-circle"></i>'
-                                        }
+                                          <div class="shadow_box">
+                                            <div class="card-user">
+                                              <i
+                                                class="fas fa-user-circle fa-2x streamGrey"
+                                              ></i>
+                                              ${
+                                                coll.verified
+                                                  ? '<i class="fas fa-check-circle"></i>'
+                                                  : '<i class="fas fa-times-circle"></i>'
+                                              }
 
 
-                                      </div>
-                                      <div class="card-user-details">
-                                        <span class="name">${coll.user}</span>
-                                        <span class="role"
-                                          ><i class="fas fa-tags"></i>
-                                          ${coll.role}</span
-                                        >
+                                            </div>
+                                            <div class="card-user-details">
+                                              <span class="name">${
+                                                coll.user
+                                              }</span>
+                                              <span class="role"
+                                                ><i class="fas fa-tags"></i>
+                                                ${coll.role}</span
+                                              >
 
-                                        ${
-                                          coll.verified
-                                            ? `<span class="varification">Verified</span>`
-                                            : `<span class="varification unverified">Unverified</span>`
-                                        }
-                                      </div>
-                                    </div>
-                                  </div>`;
+                                              ${
+                                                coll.verified
+                                                  ? `<span class="varification">Verified</span>`
+                                                  : `<span class="varification unverified">Unverified</span>`
+                                              }
+                                            </div>
+                                          </div>
+                                        </div>`;
                   });
                   $(`#collapse-${video}`).append(`
-                        <div id="cb-${item.videoId}" class="card-body sh">
-                          <div class="card-wrap">
-                            <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <div class="post_thumbnail">
-                                  <img
-                                    alt="image"
-                                    src="https://i.ytimg.com/vi/${
-                                      item.videoId
-                                    }/default.jpg"
-                                  />
-                                </div>
-                              </div>
-                              <div class="col-md-8 pl-md-2">
-                                <div class="post_info">
-                                  <h2 class="post_title" id="pt-${
-                                    item.videoId
-                                  }">
-                                    ${item.title}
-                                  </h2>
-                                  <div
-                                    class="d-flex justify-content-between social-p"
-                                  >
-                                    <div class="social-post">
-                                      <img
-                                        alt="image"
-                                        src="./img/youtube-icon.svg"
-                                      />
-                                      <span id="plateform">YouTube</span>
+                              <div id="cb-${item.videoId}" class="card-body sh">
+                                <div class="card-wrap">
+                                  <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                      <div class="post_thumbnail">
+                                        <img
+                                          alt="image"
+                                          src="https://i.ytimg.com/vi/${
+                                            item.videoId
+                                          }/default.jpg"
+                                        />
+                                      </div>
                                     </div>
-                                    <span> ${new Date(item.createdAt)
-                                      .toString()
-                                      .slice(4, 15)} </span>
-                                  </div>
-                                </div>
-                                <div class="row no-gutters shadow_row mt-2">
+                                    <div class="col-md-8 pl-md-2">
+                                      <div class="post_info">
+                                        <h2 class="post_title" id="pt-${
+                                          item.videoId
+                                        }">
+                                          ${item.title}
+                                        </h2>
+                                        <div
+                                          class="d-flex justify-content-between social-p"
+                                        >
+                                          <div class="social-post">
+                                            <img
+                                              alt="image"
+                                              src="./img/youtube-icon.svg"
+                                            />
+                                            <span id="plateform">YouTube</span>
+                                          </div>
+                                          <span> ${new Date(item.createdAt)
+                                            .toString()
+                                            .slice(4, 15)} </span>
+                                        </div>
+                                      </div>
+                                      <div class="row no-gutters shadow_row mt-2">
 
-                                  ${collaborators}
-                                  <div class="col-md-2 d-none">
-                                    <div class="shadow_box">
-                                      <a href="#" class="see_more">See more</a>
+                                        ${collaborators}
+                                        <div class="col-md-2 d-none">
+                                          <div class="shadow_box">
+                                            <a href="#" class="see_more">See more</a>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
                               </div>
+
                             </div>
-                        </div>
-
-                      </div>
-                      `);
+                            `);
                 });
               }
 
@@ -587,7 +612,8 @@
                 //           data-parent="#creatorAccordion"
                 //         ></div>`
                 // );
-                _ownTweet[video].forEach((item, i) => {
+                // _ownTweet.tweet &&
+                _ownTweet[tweet].forEach((item, i) => {
                   const { media } = item;
                   let thumbnail_url = null;
                   if (media) {
@@ -601,82 +627,86 @@
                     collaborators =
                       collaborators +
                       `<div class="col-md-6 mb-1">
-                                    <div class="shadow_box">
-                                      <div class="card-user">
-                                        <i
-                                          class="fas fa-user-circle fa-2x streamGrey"
-                                        ></i>
-                                        ${
-                                          coll.verified
-                                            ? '<i class="fas fa-check-circle"></i>'
-                                            : '<i class="fas fa-times-circle"></i>'
-                                        }
+                                          <div class="shadow_box">
+                                            <div class="card-user">
+                                              <i
+                                                class="fas fa-user-circle fa-2x streamGrey"
+                                              ></i>
+                                              ${
+                                                coll.verified
+                                                  ? '<i class="fas fa-check-circle"></i>'
+                                                  : '<i class="fas fa-times-circle"></i>'
+                                              }
 
 
-                                      </div>
-                                      <div class="card-user-details">
-                                        <span class="name">${coll.user}</span>
-                                        <span class="role"
-                                          ><i class="fas fa-tags"></i>
-                                          ${coll.role}</span
-                                        >
+                                            </div>
+                                            <div class="card-user-details">
+                                              <span class="name">${
+                                                coll.user
+                                              }</span>
+                                              <span class="role"
+                                                ><i class="fas fa-tags"></i>
+                                                ${coll.role}</span
+                                              >
 
-                                        ${
-                                          coll.verified
-                                            ? `<span class="varification">Verified</span>`
-                                            : `<span class="varification unverified">Unverified</span>`
-                                        }
-                                      </div>
-                                    </div>
-                                  </div>`;
+                                              ${
+                                                coll.verified
+                                                  ? `<span class="varification">Verified</span>`
+                                                  : `<span class="varification unverified">Unverified</span>`
+                                              }
+                                            </div>
+                                          </div>
+                                        </div>`;
                   });
                   $(`#collapse-${tweet}`).append(`
-                        <div id="cb-${item.id}" class="card-body sh">
-                          <div class="card-wrap">
-                            <div class="row no-gutters">
-                              <div class="col-md-4">
-                                <div class="post_thumbnail">
-                                  <img
-                                    alt="image"
-                                    src="${thumbnail_url}"
-                                  />
-                                </div>
-                              </div>
-                              <div class="col-md-8 pl-md-2">
-                                <div class="post_info">
-                                  <h2 class="post_title" id="pt-${item.id}">
-                                    ${item.text.split("https")[0]}
-                                  </h2>
-                                  <div
-                                    class="d-flex justify-content-between social-p"
-                                  >
-                                    <div class="social-post">
-                                      <img
-                                        alt="image"
-                                        src="./img/twitter-icon.svg"
-                                      />
-                                      <span id="plateform">twitter</span>
+                              <div id="cb-${item.id}" class="card-body sh">
+                                <div class="card-wrap">
+                                  <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                      <div class="post_thumbnail">
+                                        <img
+                                          alt="image"
+                                          src="${thumbnail_url}"
+                                        />
+                                      </div>
                                     </div>
-                                    <span> ${new Date(item.createdAt)
-                                      .toString()
-                                      .slice(4, 15)} </span>
-                                  </div>
-                                </div>
-                                <div class="row no-gutters shadow_row mt-2">
+                                    <div class="col-md-8 pl-md-2">
+                                      <div class="post_info">
+                                        <h2 class="post_title" id="pt-${
+                                          item.id
+                                        }">
+                                          ${item.text.split("https")[0]}
+                                        </h2>
+                                        <div
+                                          class="d-flex justify-content-between social-p"
+                                        >
+                                          <div class="social-post">
+                                            <img
+                                              alt="image"
+                                              src="./img/twitter-icon.svg"
+                                            />
+                                            <span id="plateform">twitter</span>
+                                          </div>
+                                          <span> ${new Date(item.createdAt)
+                                            .toString()
+                                            .slice(4, 15)} </span>
+                                        </div>
+                                      </div>
+                                      <div class="row no-gutters shadow_row mt-2">
 
-                                  ${collaborators}
-                                  <div class="col-md-2 d-none">
-                                    <div class="shadow_box">
-                                      <a href="#" class="see_more">See more</a>
+                                        ${collaborators}
+                                        <div class="col-md-2 d-none">
+                                          <div class="shadow_box">
+                                            <a href="#" class="see_more">See more</a>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
                               </div>
+
                             </div>
-                        </div>
-
-                      </div>
-                      `);
+                            `);
                 });
               }
               $("#user_name").text(user.displayName);
